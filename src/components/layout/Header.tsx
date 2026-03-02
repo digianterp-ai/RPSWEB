@@ -249,7 +249,7 @@ export default function Header() {
               <Link href="/erp/teacher" className="block text-sm py-1">
                 Teacher
               </Link>
-              <Link href="/erp/admin" className="block text-sm py-1">
+              <Link target="_blank" href="https://schoolerpindia.net/school/royal/" className="block text-sm py-1">
                 Admin
               </Link>
             </div>
