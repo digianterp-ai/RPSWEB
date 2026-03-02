@@ -58,3 +58,32 @@ html {
 .animate-float {
   animation: float 8s ease-in-out infinite;
 }
+
+@keyframes floatY {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes rotateSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulseFade {
+  0% { opacity: 0.15; }
+  50% { opacity: 0.4; }
+  100% { opacity: 0.15; }
+}
+
+.animate-floatY {
+  animation: floatY 8s ease-in-out infinite;
+}
+
+.animate-rotateSlow {
+  animation: rotateSlow 40s linear infinite;
+}
+
+.animate-pulseFade {
+  animation: pulseFade 6s ease-in-out infinite;
+}

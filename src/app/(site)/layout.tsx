@@ -1,4 +1,5 @@
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 export default function SiteLayout({
   
@@ -6,5 +7,5 @@ export default function SiteLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return <>{children} <Footer /> </>;
 }

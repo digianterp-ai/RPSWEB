@@ -3,21 +3,21 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 150 150" style="enable-background:new 0 0 150 150;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:none;stroke:#0072BB;stroke-width:3;stroke-miterlimit:10;}
-	.st1{fill:none;stroke:#0072BB;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st0{fill:none;stroke:#0072BB;stroke-width:4;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#0072BB;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
 </style>
 <g>
 	<g>
-		<path class="st0" d="M66.89,114.2H52.83c-0.55,0-1-0.45-1-1V74.88c0-0.55,0.45-1,1-1h14.06c0.55,0,1,0.45,1,1v38.32
-			C67.89,113.75,67.44,114.2,66.89,114.2z"/>
-		<path class="st0" d="M93.95,114.2H79.89c-0.55,0-1-0.45-1-1V61.44c0-0.55,0.45-1,1-1h14.06c0.55,0,1,0.45,1,1v51.76
-			C94.95,113.75,94.5,114.2,93.95,114.2z"/>
-		<path class="st0" d="M121.01,114.2h-14.06c-0.55,0-1-0.45-1-1V48c0-0.55,0.45-1,1-1h14.06c0.55,0,1,0.45,1,1v65.2
-			C122.01,113.75,121.56,114.2,121.01,114.2z"/>
+		<path class="st0" d="M66.9,114.2H52.8c-0.5,0-1-0.4-1-1V74.9c0-0.6,0.5-1,1-1h14.1c0.6,0,1,0.4,1,1v38.3
+			C67.9,113.8,67.4,114.2,66.9,114.2z"/>
+		<path class="st0" d="M93.9,114.2H79.9c-0.6,0-1-0.4-1-1V61.4c0-0.5,0.4-1,1-1h14.1c0.6,0,1,0.5,1,1v51.8
+			C94.9,113.8,94.5,114.2,93.9,114.2z"/>
+		<path class="st0" d="M121,114.2H107c-0.6,0-1-0.4-1-1V48c0-0.5,0.4-1,1-1H121c0.6,0,1,0.5,1,1v65.2
+			C122,113.8,121.6,114.2,121,114.2z"/>
 	</g>
 	<g>
-		<line class="st1" x1="25.16" y1="17.07" x2="25.16" y2="133.58"/>
-		<line class="st1" x1="145.27" y1="114.2" x2="5.51" y2="114.2"/>
+		<line class="st1" x1="25.2" y1="17.1" x2="25.2" y2="133.6"/>
+		<line class="st1" x1="145.3" y1="114.2" x2="5.5" y2="114.2"/>
 	</g>
 </g>
 </svg>

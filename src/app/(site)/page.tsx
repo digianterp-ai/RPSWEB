@@ -1,5 +1,15 @@
 import Hero from "@/components/layout/Hero";
 import Header from "@/components/layout/Header";
+import WelcomeSection from "./_sections/WelcomeSection";
+import HighlightsSection from "./_sections/HighlightsSection";
+import AboutSection from "./_sections/AboutSection";
+import PillarsSection from "./_sections/PillarsSection";
+import StructuredSystemSection from "./_sections/StructuredSystemSection";
+import DigitalSection from "./_sections/DigitalSection";
+import CompetitiveSection from "./_sections/CompetitiveSection";
+import FacilitiesSection from "./_sections/FacilitiesSection";
+import VisionMissionSection from "./_sections/VisionMissionSection";
+import FinalCTASection from "./_sections/FinalCTASection";
 
 export default function Home() {
   return (
@@ -10,12 +20,17 @@ export default function Home() {
       </div>
 
       {/* Next sections */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-6">
-            Structured Academic Framework
-          </h2>
-        </div>
+      <section className=" bg-white">
+          <WelcomeSection />
+          <HighlightsSection />
+          <AboutSection />
+          <PillarsSection />
+          <StructuredSystemSection />
+          <DigitalSection />
+          <CompetitiveSection />
+          <FacilitiesSection />
+          <VisionMissionSection />
+          <FinalCTASection />
       </section>
     </>
   );

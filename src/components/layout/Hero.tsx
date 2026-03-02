@@ -10,8 +10,11 @@ function FloatingIcon({
   delay,
   top,
   left,
-  size = 120,
-  opacity = 0.20,
+  size = 60,
+  opacity = 0.25,
+  rotate = false,
+  pulse = false,
+  depth = 1,
 }: {
   children: React.ReactNode;
   delay: number;
@@ -19,16 +22,25 @@ function FloatingIcon({
   left: string;
   size?: number;
   opacity?: number;
+  rotate?: boolean;
+  pulse?: boolean;
+  depth?: number;
 }) {
   return (
     <div
-      className="absolute animate-float pointer-events-none"
+      className={`
+        absolute pointer-events-none
+        ${rotate ? "animate-rotateSlow" : ""}
+        ${pulse ? "animate-pulseFade" : ""}
+        animate-floatY
+      `}
       style={{
         top,
         left,
         animationDelay: `${delay}s`,
         opacity,
         transform: `scale(${size / 60})`,
+        filter: depth === 2 ? "blur(1px)" : "blur(0.3px)",
       }}
     >
       {children}
@@ -56,8 +68,8 @@ function RocketIcon() {
     <img
       src="/icons/icon4.svg"
       alt="Icon"
-      width={120}
-      height={120}
+      width={160}
+      height={160}
     />
   );
 }
@@ -67,8 +79,8 @@ function FormulaIcon() {
     <img
       src="/icons/homeicon1.svg"
       alt="Icon"
-      width={80}
-      height={80}
+      width={180}
+      height={180}
     />
   );
 }
@@ -100,8 +112,8 @@ function PiIcon() {
     <img
       src="/icons/homeicon3.svg"
       alt="Icon"
-      width={80}
-      height={80}
+      width={200}
+      height={200}
     />
   );
 }
@@ -111,8 +123,8 @@ function ChartIcon() {
     <img
       src="/icons/chart.svg"
       alt="Icon"
-      width={80}
-      height={80}
+      width={180}
+      height={180}
     />
   );
 }
@@ -202,7 +214,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden text-center px-6 bg-[#f9f9f9]">
+    <section     className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden text-center px-4 sm:px-6 bg-[#f9f9f9]">
 
       {/* Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -212,7 +224,7 @@ export default function Hero() {
           className="absolute inset-0"
           style={{
             backgroundImage:
-              "repeating-linear-gradient(to bottom, #e6e6e6 0px, #e6e6e6 1px, transparent 1px, transparent 60px)",
+              "repeating-linear-gradient(to bottom, #e6e6e6 0px, #e6e6e6 1px, transparent 1px, transparent 50px)",
             marginTop: "140px",
           }}
         />
@@ -224,14 +236,39 @@ export default function Hero() {
       </div>
 
       {/* Floating Icons */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        <FloatingIcon delay={0} top="10%" left="15%" ><AtomIcon /></FloatingIcon>
-        <FloatingIcon delay={2} top="60%" left="80%"><RocketIcon /></FloatingIcon>
-        <FloatingIcon delay={4} top="30%" left="75%"><FormulaIcon /></FloatingIcon>
-        <FloatingIcon delay={6} top="75%" left="15%"><BookIcon /></FloatingIcon>
-        <FloatingIcon delay={8} top="20%" left="90%"><TestTubeIcon /></FloatingIcon>
-        <FloatingIcon delay={10} top="40%" left="20%"><PiIcon /></FloatingIcon>
-        <FloatingIcon delay={2} top="80%" left="90%"><ChartIcon /></FloatingIcon>
+      <div className="hidden sm:block absolute inset-0 pointer-events-none overflow-hidden z-2">
+
+      {/* Large Background Layer (Blurred) */}
+        <FloatingIcon delay={0} top="15%" left="5%" size={140} opacity={0.12} depth={2}>
+          <FormulaIcon />
+        </FloatingIcon>
+
+        <FloatingIcon delay={0} top="10%" left="80%" size={150} opacity={0.10} depth={2}>
+          <RocketIcon />
+        </FloatingIcon>
+
+        {/* Mid Layer */}
+        <FloatingIcon delay={0} top="60%" left="15%" size={90} opacity={0.25} rotate>
+          <AtomIcon />
+        </FloatingIcon>
+
+        <FloatingIcon delay={0} top="80%" left="85%" size={85} opacity={0.28} pulse>
+          <BookIcon />
+        </FloatingIcon>
+
+        {/* Front Small Tech Icons */}
+        <FloatingIcon delay={0} top="39%" left="75%" size={60} opacity={0.35}>
+          <PiIcon />
+        </FloatingIcon>
+
+        <FloatingIcon delay={0} top="40%" left="20%" size={70} opacity={0.32}>
+          <TestTubeIcon />
+        </FloatingIcon>
+
+        <FloatingIcon delay={0} top="80%" left="10%" size={70} opacity={0.32}>
+          <ChartIcon />
+        </FloatingIcon>
+
       </div>
 
       {/* Content */}
@@ -240,7 +277,7 @@ export default function Hero() {
         <div className={`transition-all duration-700 ${scrolled ? "opacity-0 -translate-y-10" : "opacity-100 translate-y-0"}`}>
           <img src="/images/logo-royal.png"
             alt="Royal Public School"
-            className="h-28 md:h-36 w-auto mx-auto mb-6" />
+            className="h-20 sm:h-28 md:h-36 w-auto mx-auto mb-6" />
         </div>
 
         <p className="text-2xl md:text-2xl font-medium mb-2">
@@ -254,16 +291,21 @@ export default function Hero() {
 
         <div className="flex items-center justify-center gap-4 text-gray-700 mb-2 w-full">
           <div className="w-16 h-px bg-gray-400"></div>
-          <span className="text-lg">That is Education which liberates</span>
+          <span className="text-lg">True knowledge liberates</span>
           <div className="w-16 h-px bg-gray-400"></div>
         </div>
 
         {/* BIG Heading */}
         <div
           className="relative mt-10 flex justify-center"
-          style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
+          style={{
+            transform:
+              typeof window !== "undefined" && window.innerWidth < 768
+                ? "none"
+                : `translate(${position.x}px, ${position.y}px)`
+          }}
         >
-          <div className={`relative px-12 py-8 transition-all duration-700 ${fadeBig ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
+          <div className={`relative px-6 py-6 sm:px-10 sm:py-8 transition-all duration-700 ${fadeBig ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
 
             <div className="absolute -top-4 -left-4">
               <div className="w-12 h-0.75 bg-gray-900 rounded-full"></div>
@@ -277,11 +319,11 @@ export default function Hero() {
 
             <div className={`absolute top-0 left-0 h-0.75 bg-yellow-600 transition-all duration-700 ${fadeBig ? "w-12" : "w-0"}`}></div>
 
-            <h2 className="text-yellow-600 text-5xl md:text-6xl font-extrabold tracking-wide text-center">
+            <h2 className="text-yellow-600 text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-wide text-center">
               {bigTexts[activeBig].top}
             </h2>
 
-            <h1 className="text-7xl md:text-8xl font-extrabold text-gray-900 leading-tight text-center">
+            <h1 className="text-5xl sm:text-6xl md:text-8xl font-extrabold text-gray-900 leading-tight text-center">
               {bigTexts[activeBig].bottom}
             </h1>
 
@@ -292,7 +334,7 @@ export default function Hero() {
           Empowering Minds from Foundation to Higher Secondary.
         </div>
 
-        <div className="mt-8 flex gap-6 flex-wrap justify-center">
+        <div className="mt-8 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
           <button className="relative overflow-hidden px-8 py-3 rounded-lg text-lg font-semibold text-white bg-[#3a88fd] group transition-all duration-300 hover:-translate-y-1">
 
             {/* Liquid Fill */}
