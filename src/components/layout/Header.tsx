@@ -3,79 +3,81 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Menu, X, Lock } from "lucide-react";
+import { Menu, X, Lock, ChevronDown } from "lucide-react";
 
 export default function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeMobile, setActiveMobile] = useState<string | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const leftMenu = [
+  const menu = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Academics", href: "/academics" },
-    { name: "Facilities", href: "/facilities" },
-  ];
-
-  const rightMenu = [
-    { name: "Gallery", href: "/gallery" },
-    { name: "Admission", href: "/admissions" },
-    { name: "Notice", href: "/noticeboard" },
+    {
+      name: "About Us",
+      submenu: [
+        { name: "Vision & Mission", href: "/about/vision" },
+        { name: "Principal Message", href: "/about/principal" },
+        { name: "School History", href: "/about/history" },
+        { name: "Management", href: "/about/management" },
+      ],
+    },
+    {
+      name: "Academics",
+      submenu: [
+        { name: "Pre-Primary", href: "/academics/pre-primary" },
+        { name: "Primary", href: "/academics/primary" },
+        { name: "Middle School", href: "/academics/middle" },
+        { name: "Higher Secondary", href: "/academics/higher-secondary" },
+        { name: "Curriculum", href: "/academics/curriculum" },
+      ],
+    },
+    {
+      name: "Facilities",
+      submenu: [
+        { name: "Smart Classes", href: "/facilities/smart" },
+        { name: "Labs", href: "/facilities/labs" },
+        { name: "Library", href: "/facilities/library" },
+        { name: "Sports", href: "/facilities/sports" },
+        { name: "Transport", href: "/facilities/transport" },
+      ],
+    },
+    {
+      name: "Gallery",
+      submenu: [
+        { name: "Events", href: "/gallery/events" },
+        { name: "Campus", href: "/gallery/campus" },
+        { name: "Achievements", href: "/gallery/achievements" },
+      ],
+    },
+    {
+      name: "Admissions",
+      submenu: [
+        { name: "Admission Process", href: "/admissions/process" },
+        { name: "Eligibility", href: "/admissions/eligibility" },
+        { name: "Fee Structure", href: "/admissions/fees" },
+        { name: "Enquiry Form", href: "/admissions/enquiry" },
+      ],
+    },
+    {
+      name: "Notice Board",
+      submenu: [
+        { name: "Latest Announcements", href: "/notice/announcements" },
+        { name: "Circulars", href: "/notice/circulars" },
+        { name: "Exam Dates", href: "/notice/exams" },
+      ],
+    },
     { name: "Contact", href: "/contact" },
   ];
 
-  const allMenu = [...leftMenu, ...rightMenu];
-
-  const renderMenu = (menu: { name: string; href: string }[]) =>
-    menu.map((item) => {
-      const isActive = pathname === item.href;
-
-      return (
-        <Link
-          key={item.href}
-          href={item.href}
-          className={`relative group text-md tracking-wide transition-all duration-300 ${
-            isActive
-              ? "font-semibold text-blue-900"
-              : "text-gray-700 hover:text-blue-900"
-          }`}
-        >
-          {item.name}
-          <span
-            className={`absolute left-1/2 -translate-x-1/2 -bottom-2 h-0.5 bg-yellow-600 transition-all duration-300 ${
-              isActive ? "w-full" : "w-0 group-hover:w-full"
-            }`}
-          ></span>
-        </Link>
-      );
-    });
-
   return (
     <header className="w-full relative z-50">
-
-      {/* TOP BAR */}
-      <div className="bg-blue-900 text-white text-sm py-2 hidden md:block">
-        <div className="max-w-7xl mx-auto flex justify-between px-6">
-          <div className="flex gap-6">
-            <span>📞 +91 79873 14617</span>
-            <span>✉ info@rpsdeori.org</span>
-          </div>
-          <div className="font-semibold text-yellow-400">
-            Admissions Open 2026–27
-          </div>
-        </div>
-      </div>
-
-      {/* MAIN NAV */}
       <div
         className={`transition-all duration-300 border-t-4 border-yellow-600 ${
           scrolled
@@ -83,12 +85,7 @@ export default function Header() {
             : "bg-[#f3f0e6] py-6"
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6">
-
-          {/* LEFT MENU (Desktop) */}
-          <nav className="hidden md:flex gap-12">
-            {renderMenu(leftMenu)}
-          </nav>
+        <div className="w-full flex items-center justify-between px-8 lg:px-20">
 
           {/* LOGO */}
           <Link href="/" className="flex items-center">
@@ -97,72 +94,163 @@ export default function Header() {
               alt="Royal Public School Logo"
               className={`transition-all duration-300 ${
                 scrolled ? "h-14" : "h-20"
-              } w-auto`}
+              }`}
             />
           </Link>
 
-          {/* RIGHT MENU (Desktop) */}
-          <nav className="hidden md:flex items-center gap-10">
-            {renderMenu(rightMenu)}
+          {/* DESKTOP MENU */}
+          <nav className="hidden lg:flex items-center gap-10">
+            {menu.map((item) => (
+              <div key={item.name} className="relative group">
+
+                {item.href ? (
+                  <Link
+                    href={item.href}
+                    className="text-gray-700 hover:text-blue-900 transition"
+                  >
+                    {item.name}
+                  </Link>
+                ) : (
+                  <button className="flex items-center gap-1 text-gray-700 hover:text-blue-900 transition">
+                    {item.name}
+                    <ChevronDown
+                      size={16}
+                      className="transition-transform duration-300 group-hover:rotate-180"
+                    />
+                  </button>
+                )}
+
+                {item.submenu && (
+                  <div
+                    className="absolute left-1/2 -translate-x-1/2 top-14
+                               w-65
+                               bg-white
+                               rounded-xl
+                               shadow-[0_20px_50px_rgba(0,0,0,0.08)]
+                               border border-gray-100
+                               opacity-0 invisible translate-y-3
+                               group-hover:opacity-100
+                               group-hover:visible
+                               group-hover:translate-y-0
+                               transition-all duration-300"
+                  >
+                    <div className="py-3">
+                      {item.submenu.map((sub) => (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          className="block px-6 py-3 text-sm text-gray-700
+                                     hover:bg-blue-50
+                                     hover:text-blue-900
+                                     transition-all duration-200"
+                        >
+                          {sub.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
 
             {/* ERP BUTTON */}
-            <Link
-              href="/erp-login"
-              className="relative px-6 py-2 rounded-md font-semibold text-white bg-blue-900 
-                         overflow-hidden transition-all duration-300
-                         hover:scale-105 hover:shadow-lg group flex items-center gap-2"
-            >
-              <span className="relative z-10 flex items-center gap-2">
-                <Lock size={18} strokeWidth={2.2} />
-                ERP
-              </span>
+            <div className="relative group">
+              <button className="flex items-center gap-2 px-6 py-2 bg-blue-900 text-white rounded-md font-semibold hover:shadow-lg transition">
+                <Lock size={18} />
+                ERP Login
+              </button>
 
-              <span className="absolute inset-0 bg-yellow-500 scale-x-0 origin-left 
-                               transition-transform duration-300 
-                               group-hover:scale-x-100"></span>
-            </Link>
+              <div
+                className="absolute right-0 top-14 w-55
+                           bg-white rounded-xl
+                           shadow-[0_20px_50px_rgba(0,0,0,0.08)]
+                           border border-gray-100
+                           opacity-0 invisible translate-y-3
+                           group-hover:opacity-100
+                           group-hover:visible
+                           group-hover:translate-y-0
+                           transition-all duration-300"
+              >
+                <div className="py-3">
+                  <Link href="/erp/student" className="block px-6 py-3 text-sm hover:bg-blue-50">
+                    Student Login
+                  </Link>
+                  <Link href="/erp/teacher" className="block px-6 py-3 text-sm hover:bg-blue-50">
+                    Teacher Login
+                  </Link>
+                  <Link href="/erp/admin" className="block px-6 py-3 text-sm hover:bg-blue-50">
+                    Admin Login
+                  </Link>
+                </div>
+              </div>
+            </div>
           </nav>
 
-          {/* MOBILE MENU BUTTON */}
+          {/* MOBILE TOGGLE */}
           <button
-            className="md:hidden text-blue-900"
+            className="lg:hidden text-blue-900"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             {mobileOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
 
-        {/* MOBILE DROPDOWN */}
+        {/* MOBILE MENU */}
         {mobileOpen && (
-          <div className="md:hidden bg-[#f3f0e6] shadow-lg border-t border-yellow-600">
-            <div className="flex flex-col items-center py-6 space-y-6">
+          <div className="lg:hidden bg-[#f3f0e6] border-t border-yellow-600 px-6 py-6 space-y-4">
+            {menu.map((item) => (
+              <div key={item.name}>
+                {item.submenu ? (
+                  <>
+                    <button
+                      onClick={() =>
+                        setActiveMobile(
+                          activeMobile === item.name ? null : item.name
+                        )
+                      }
+                      className="flex justify-between w-full font-medium text-gray-800"
+                    >
+                      {item.name}
+                      <ChevronDown size={18} />
+                    </button>
 
-              {allMenu.map((item) => {
-                const isActive = pathname === item.href;
-                return (
+                    {activeMobile === item.name && (
+                      <div className="pl-4 mt-2 space-y-2">
+                        {item.submenu.map((sub) => (
+                          <Link
+                            key={sub.href}
+                            href={sub.href}
+                            onClick={() => setMobileOpen(false)}
+                            className="block text-sm text-gray-600 hover:text-blue-900"
+                          >
+                            {sub.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
                   <Link
-                    key={item.href}
-                    href={item.href}
+                    href={item.href || "#"}
                     onClick={() => setMobileOpen(false)}
-                    className={`text-lg transition-all ${
-                      isActive
-                        ? "font-semibold text-blue-900"
-                        : "text-gray-700 hover:text-blue-900"
-                    }`}
+                    className="block font-medium text-gray-800"
                   >
                     {item.name}
                   </Link>
-                );
-              })}
+                )}
+              </div>
+            ))}
 
-              {/* ERP BUTTON MOBILE */}
-              <Link
-                href="/erp-login"
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-2 px-6 py-3 bg-blue-900 text-white rounded-md font-semibold hover:bg-yellow-500 hover:text-black transition-all duration-300"
-              >
-                <Lock size={18} />
-                ERP Login
+            <div className="pt-4 border-t">
+              <p className="text-sm font-semibold mb-2">ERP Login</p>
+              <Link href="/erp/student" className="block text-sm py-1">
+                Student
+              </Link>
+              <Link href="/erp/teacher" className="block text-sm py-1">
+                Teacher
+              </Link>
+              <Link href="/erp/admin" className="block text-sm py-1">
+                Admin
               </Link>
             </div>
           </div>
