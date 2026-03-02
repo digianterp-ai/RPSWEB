@@ -8,11 +8,13 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-
 export const metadata: Metadata = {
   title: "Royal Public School | EduIntellect™ Pilot",
   description:
     "Structured Academic Acceleration with Scientific Growth Tracking.",
+  icons: {
+    icon: "/images/favicon.png",
+  },
 };
 
 export default function RootLayout({
@@ -22,9 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
-        {children}
-      </body>
+      <body className={poppins.className}>{children}</body>
     </html>
   );
 }
