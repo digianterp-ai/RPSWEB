@@ -175,7 +175,7 @@ export default function Header() {
                   <Link href="/erp/student" className="block px-6 py-3 text-sm hover:bg-blue-50">
                     Student Login
                   </Link>
-                  <Link href="/erp/teacher" className="block px-6 py-3 text-sm hover:bg-blue-50">
+                  <Link target="_blank" href="https://schoolerpindia.net/school/royal/" className="block px-6 py-3 text-sm hover:bg-blue-50">
                     Teacher Login
                   </Link>
                   <Link href="/erp/admin" className="block px-6 py-3 text-sm hover:bg-blue-50">
@@ -246,10 +246,10 @@ export default function Header() {
               <Link href="/erp/student" className="block text-sm py-1">
                 Student
               </Link>
-              <Link href="/erp/teacher" className="block text-sm py-1">
+              <Link target="_blank" href="https://schoolerpindia.net/school/royal/" className="block text-sm py-1">
                 Teacher
               </Link>
-              <Link target="_blank" href="https://schoolerpindia.net/school/royal/" className="block text-sm py-1">
+              <Link href="/erp/admin" className="block text-sm py-1">
                 Admin
               </Link>
             </div>
