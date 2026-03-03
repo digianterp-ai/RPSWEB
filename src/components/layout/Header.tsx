@@ -1,12 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X, Lock, ChevronDown } from "lucide-react";
 
 export default function Header() {
-  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeMobile, setActiveMobile] = useState<string | null>(null);
@@ -21,6 +19,7 @@ export default function Header() {
     { name: "Home", href: "/" },
     {
       name: "About Us",
+      href: "/about",
       submenu: [
         { name: "Vision & Mission", href: "/about/vision" },
         { name: "Principal Message", href: "/about/principal" },
@@ -30,6 +29,7 @@ export default function Header() {
     },
     {
       name: "Academics",
+      href: "/academics",
       submenu: [
         { name: "Pre-Primary", href: "/academics/pre-primary" },
         { name: "Primary", href: "/academics/primary" },
@@ -40,6 +40,7 @@ export default function Header() {
     },
     {
       name: "Facilities",
+      href: "/facilities",
       submenu: [
         { name: "Smart Classes", href: "/facilities/smart" },
         { name: "Labs", href: "/facilities/labs" },
@@ -50,6 +51,7 @@ export default function Header() {
     },
     {
       name: "Gallery",
+      href: "/gallery",
       submenu: [
         { name: "Events", href: "/gallery/events" },
         { name: "Campus", href: "/gallery/campus" },
@@ -58,6 +60,7 @@ export default function Header() {
     },
     {
       name: "Admissions",
+      href: "/admissions",
       submenu: [
         { name: "Admission Process", href: "/admissions/process" },
         { name: "Eligibility", href: "/admissions/eligibility" },
@@ -88,7 +91,7 @@ export default function Header() {
         <div className="w-full flex items-center justify-between px-8 lg:px-20">
 
           {/* LOGO */}
-          <Link href="/" className="flex items-center">
+          <Link href="/">
             <img
               src="/images/logo-royal.png"
               alt="Royal Public School Logo"
@@ -103,74 +106,74 @@ export default function Header() {
             {menu.map((item) => (
               <div key={item.name} className="relative group">
 
-                {item.href ? (
-                  <Link
-                    href={item.href}
-                    className="text-gray-700 hover:text-blue-900 transition"
-                  >
-                    {item.name}
-                  </Link>
-                ) : (
-                  <button className="flex items-center gap-1 text-gray-700 hover:text-blue-900 transition">
-                    {item.name}
+                {item.submenu ? (
+                  <div className="flex items-center gap-1 text-gray-700 hover:text-blue-900 transition cursor-pointer">
+                    {item.href ? (
+                      <Link href={item.href}>{item.name}</Link>
+                    ) : (
+                      <span>{item.name}</span>
+                    )}
                     <ChevronDown
                       size={16}
                       className="transition-transform duration-300 group-hover:rotate-180"
                     />
-                  </button>
+                  </div>
+                ) : (
+                  <Link
+                    href={item.href || "#"}
+                    className="text-gray-700 hover:text-blue-900 transition"
+                  >
+                    {item.name}
+                  </Link>
                 )}
 
+                {/* DROPDOWN */}
                 {item.submenu && (
-                  <div
-                    className="absolute left-1/2 -translate-x-1/2 top-14
-                               w-65
-                               bg-white
-                               rounded-xl
-                               shadow-[0_20px_50px_rgba(0,0,0,0.08)]
-                               border border-gray-100
-                               opacity-0 invisible translate-y-3
-                               group-hover:opacity-100
-                               group-hover:visible
-                               group-hover:translate-y-0
-                               transition-all duration-300"
-                  >
+                  <div className="absolute left-1/2 -translate-x-1/2 top-14
+                                  w-64 bg-white rounded-xl
+                                  shadow-[0_20px_50px_rgba(0,0,0,0.08)]
+                                  border border-gray-100
+                                  opacity-0 invisible translate-y-3
+                                  group-hover:opacity-100
+                                  group-hover:visible
+                                  group-hover:translate-y-0
+                                  transition-all duration-300">
+
                     <div className="py-3">
                       {item.submenu.map((sub) => (
                         <Link
                           key={sub.href}
                           href={sub.href}
                           className="block px-6 py-3 text-sm text-gray-700
-                                     hover:bg-blue-50
-                                     hover:text-blue-900
-                                     transition-all duration-200"
+                                     hover:bg-blue-50 hover:text-blue-900 transition"
                         >
                           {sub.name}
                         </Link>
                       ))}
                     </div>
+
                   </div>
                 )}
               </div>
             ))}
 
-            {/* ERP BUTTON */}
+            {/* ERP LOGIN */}
             <div className="relative group">
               <button className="flex items-center gap-2 px-6 py-2 bg-blue-900 text-white rounded-md font-semibold hover:shadow-lg transition">
                 <Lock size={18} />
                 ERP Login
               </button>
 
-              <div
-                className="absolute right-0 top-14 w-55
-                           bg-white rounded-xl
-                           shadow-[0_20px_50px_rgba(0,0,0,0.08)]
-                           border border-gray-100
-                           opacity-0 invisible translate-y-3
-                           group-hover:opacity-100
-                           group-hover:visible
-                           group-hover:translate-y-0
-                           transition-all duration-300"
-              >
+              <div className="absolute right-0 top-14 w-56
+                              bg-white rounded-xl
+                              shadow-[0_20px_50px_rgba(0,0,0,0.08)]
+                              border border-gray-100
+                              opacity-0 invisible translate-y-3
+                              group-hover:opacity-100
+                              group-hover:visible
+                              group-hover:translate-y-0
+                              transition-all duration-300">
+
                 <div className="py-3">
                   <Link href="/erp/student" className="block px-6 py-3 text-sm hover:bg-blue-50">
                     Student Login
@@ -182,6 +185,7 @@ export default function Header() {
                     Admin Login
                   </Link>
                 </div>
+
               </div>
             </div>
           </nav>

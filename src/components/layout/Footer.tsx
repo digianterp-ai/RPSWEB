@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -12,9 +13,23 @@ export default function Footer() {
 
           {/* ABOUT */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">
-              Royal Public School
-            </h3>
+            <div className="flex items-center gap-4 mb-6">
+              <img src="/images/logo-royal.png"
+                alt="Royal Public School Logo"
+                width={65}
+                height={65}
+                className="object-contain"
+              />
+              <div>
+                <h3 className="text-lg font-semibold leading-tight">
+                  Royal Public School
+                </h3>
+                <p className="text-xs opacity-70">
+                  Deori, Madhya Pradesh
+                </p>
+              </div>
+            </div>
+
             <p className="text-sm opacity-80 leading-relaxed">
               An English Medium institution affiliated to MP Board,
               committed to structured academic excellence, digital
@@ -26,11 +41,11 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
             <ul className="space-y-3 text-sm opacity-80">
-              <li><Link href="/">Home</Link></li>
-              <li><Link href="/about">About</Link></li>
-              <li><Link href="/academics">Academics</Link></li>
-              <li><Link href="/facilities">Facilities</Link></li>
-              <li><Link href="/admission">Admission</Link></li>
+              <li><Link href="/" className="hover:text-[#C49A3B] transition">Home</Link></li>
+              <li><Link href="/about" className="hover:text-[#C49A3B] transition">About</Link></li>
+              <li><Link href="/academics" className="hover:text-[#C49A3B] transition">Academics</Link></li>
+              <li><Link href="/facilities" className="hover:text-[#C49A3B] transition">Facilities</Link></li>
+              <li><Link href="/admission" className="hover:text-[#C49A3B] transition">Admission</Link></li>
             </ul>
           </div>
 
@@ -51,7 +66,7 @@ export default function Footer() {
               Admissions Open 2026–27
             </p>
 
-            <button className="bg-[#C49A3B] text-black px-6 py-3 rounded-lg font-medium hover:opacity-90 transition">
+            <button className="bg-[#C49A3B] text-black px-6 py-3 rounded-lg font-medium hover:opacity-90 transition duration-300">
               Apply Now
             </button>
 
@@ -64,8 +79,7 @@ export default function Footer() {
 
         {/* DIVIDER */}
         <div className="border-t border-white/20 pt-8 text-center text-sm opacity-70">
-          © {new Date().getFullYear()} Royal Public School. All Rights Reserved. <br />
-          MP Board Affiliated | CBSE Affiliation Proposed <br />
+          MP Board Affiliated | CBSE Affiliation Proposed, © {new Date().getFullYear()} Royal Public School. All Rights Reserved. <br />
           EduIntellect™ Pilot Lab – An Inkmatik Invision
         </div>
 
