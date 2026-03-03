@@ -40,7 +40,7 @@ export default function WelcomeSection() {
         {/* RIGHT */}
         <div className="relative w-full lg:w-1/2 h-[37vh] lg:h-auto">
           <Image
-            src="/images/school-building.jpg"
+            src="/images/school-building.png"
             alt="Royal Public School Campus"
             fill
             className="object-cover"
