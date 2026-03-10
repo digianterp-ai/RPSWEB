@@ -274,10 +274,8 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 w-full max-w-5xl mx-auto">
 
-        <div className={`transition-all duration-700 ${scrolled ? "opacity-0 -translate-y-10" : "opacity-100 translate-y-0"}`}>
-          <img src="/images/logo-royal.png"
-            alt="Royal Public School"
-            className="h-20 sm:h-28 md:h-36 w-auto mx-auto mb-6" />
+        <div className="mt-30">
+          
         </div>
 
         <p className="text-2xl md:text-2xl font-medium mb-2">

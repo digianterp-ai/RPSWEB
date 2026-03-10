@@ -5,7 +5,8 @@ import Image from "next/image";
 export default function CampusPage() {
   return (
     <>
-      <section className="w-full bg-blue-600 text-white py-28 text-center">
+      <section
+        className="relative w-full min-h-[30vh] flex items-center justify-center text-white sitepage-banner">
         <h1 className="text-4xl font-bold">Campus Infrastructure</h1>
       </section>
 

@@ -7,14 +7,7 @@ export default function GalleryPage() {
     <>
       {/* HERO */}
       <section
-        className="relative w-full min-h-[55vh] flex items-center justify-center text-white"
-        style={{
-          backgroundImage: "url('/images/gallery-hero.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute inset-0 bg-linear-to-r from-blue-900/85 via-black/70 to-black/80"></div>
+        className="relative w-full min-h-[30vh] flex items-center justify-center text-white sitepage-banner">
 
         <div className="relative z-10 text-center px-8">
           <p className="uppercase tracking-[4px] text-sm opacity-80 mb-6">

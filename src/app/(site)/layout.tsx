@@ -17,6 +17,7 @@ export default function SiteLayout({
   return (
     <>
       {!isHome && <Header />}
+         {!isHome && <div className="pt-28.75"></div> }
       <Breadcrumb />
       {children}
       <Footer />

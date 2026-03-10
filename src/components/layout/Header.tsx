@@ -1,24 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { Menu, X, Lock, ChevronDown } from "lucide-react";
+import { useState } from "react";
+import { Menu, X, Search, ChevronDown } from "lucide-react";
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeMobile, setActiveMobile] = useState<string | null>(null);
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openSub, setOpenSub] = useState<string | null>(null);
+  const [erpOpen, setErpOpen] = useState(false);
 
   const menu = [
     { name: "Home", href: "/" },
+
     {
-      name: "About Us",
+      name: "About",
       href: "/about",
       submenu: [
         { name: "Vision & Mission", href: "/about/vision" },
@@ -27,17 +23,19 @@ export default function Header() {
         { name: "Management", href: "/about/management" },
       ],
     },
+
     {
       name: "Academics",
       href: "/academics",
       submenu: [
         { name: "Pre-Primary", href: "/academics/pre-primary" },
-        { name: "Primary", href: "/academics/primary" },
+        { name: "Primary (I–V)", href: "/academics/primary" },
         { name: "Middle School", href: "/academics/middle" },
         { name: "Higher Secondary", href: "/academics/higher-secondary" },
-        { name: "Curriculum", href: "/academics/curriculum" },
+        { name: "MP Board Curriculum", href: "/academics/mp-board" },
       ],
     },
+
     {
       name: "Facilities",
       href: "/facilities",
@@ -49,6 +47,7 @@ export default function Header() {
         { name: "Transport", href: "/facilities/transport" },
       ],
     },
+
     {
       name: "Gallery",
       href: "/gallery",
@@ -58,6 +57,7 @@ export default function Header() {
         { name: "Achievements", href: "/gallery/achievements" },
       ],
     },
+
     {
       name: "Admissions",
       href: "/admissions",
@@ -68,198 +68,276 @@ export default function Header() {
         { name: "Enquiry Form", href: "/admissions/enquiry" },
       ],
     },
+
     {
       name: "Notice Board",
+      href: "/notice",
       submenu: [
         { name: "Latest Announcements", href: "/notice/announcements" },
         { name: "Circulars", href: "/notice/circulars" },
         { name: "Exam Dates", href: "/notice/exams" },
       ],
     },
+
     { name: "Contact", href: "/contact" },
   ];
 
   return (
-    <header className="w-full relative z-50">
-      <div
-        className={`transition-all duration-300 border-t-4 border-yellow-600 ${
-          scrolled
-            ? "fixed top-0 left-0 w-full bg-[#f3f0e6]/95 backdrop-blur-md shadow-md py-4"
-            : "bg-[#f3f0e6] py-6"
-        }`}
-      >
-        <div className="w-full flex items-center justify-between px-8 lg:px-20">
+<header className="w-full fixed top-0 left-0 z-50">
 
-          {/* LOGO */}
-          <Link href="/">
-            <img
-              src="/images/logo-royal.png"
-              alt="Royal Public School Logo"
-              className={`transition-all duration-300 ${
-                scrolled ? "h-14" : "h-20"
-              }`}
-            />
-          </Link>
+{/* ================= TOP BAR ================= */}
 
-          {/* DESKTOP MENU */}
-          <nav className="hidden lg:flex items-center gap-10">
-            {menu.map((item) => (
-              <div key={item.name} className="relative group">
+<div className="bg-[#0B1F3A] text-white text-xs">
 
-                {item.submenu ? (
-                  <div className="flex items-center gap-1 text-gray-700 hover:text-blue-900 transition cursor-pointer">
-                    {item.href ? (
-                      <Link href={item.href}>{item.name}</Link>
-                    ) : (
-                      <span>{item.name}</span>
-                    )}
-                    <ChevronDown
-                      size={16}
-                      className="transition-transform duration-300 group-hover:rotate-180"
-                    />
-                  </div>
-                ) : (
-                  <Link
-                    href={item.href || "#"}
-                    className="text-gray-700 hover:text-blue-900 transition"
-                  >
-                    {item.name}
-                  </Link>
-                )}
+<div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-2">
 
-                {/* DROPDOWN */}
-                {item.submenu && (
-                  <div className="absolute left-1/2 -translate-x-1/2 top-14
-                                  w-64 bg-white rounded-xl
-                                  shadow-[0_20px_50px_rgba(0,0,0,0.08)]
-                                  border border-gray-100
-                                  opacity-0 invisible translate-y-3
-                                  group-hover:opacity-100
-                                  group-hover:visible
-                                  group-hover:translate-y-0
-                                  transition-all duration-300">
+<div className="flex gap-6">
+<span>+91 79873 14617</span>
+<span>info@rpsdeori.org</span>
+</div>
 
-                    <div className="py-3">
-                      {item.submenu.map((sub) => (
-                        <Link
-                          key={sub.href}
-                          href={sub.href}
-                          className="block px-6 py-3 text-sm text-gray-700
-                                     hover:bg-blue-50 hover:text-blue-900 transition"
-                        >
-                          {sub.name}
-                        </Link>
-                      ))}
-                    </div>
+<div className="flex items-center gap-4">
 
-                  </div>
-                )}
-              </div>
-            ))}
+<span>MP Board Affiliated School</span>
 
-            {/* ERP LOGIN */}
-            <div className="relative group">
-              <button className="flex items-center gap-2 px-6 py-2 bg-blue-900 text-white rounded-md font-semibold hover:shadow-lg transition">
-                <Lock size={18} />
-                ERP Login
-              </button>
+<button className="w-7 h-7 bg-white text-[#0B1F3A] rounded-full flex items-center justify-center">
+<Search size={14}/>
+</button>
 
-              <div className="absolute right-0 top-14 w-56
-                              bg-white rounded-xl
-                              shadow-[0_20px_50px_rgba(0,0,0,0.08)]
-                              border border-gray-100
-                              opacity-0 invisible translate-y-3
-                              group-hover:opacity-100
-                              group-hover:visible
-                              group-hover:translate-y-0
-                              transition-all duration-300">
+</div>
 
-                <div className="py-3">
-                  <Link href="/erp/student" className="block px-6 py-3 text-sm hover:bg-blue-50">
-                    Student Login
-                  </Link>
-                  <Link target="_blank" href="https://schoolerpindia.net/school/royal/" className="block px-6 py-3 text-sm hover:bg-blue-50">
-                    Teacher Login
-                  </Link>
-                  <Link href="/erp/admin" className="block px-6 py-3 text-sm hover:bg-blue-50">
-                    Admin Login
-                  </Link>
-                </div>
+</div>
 
-              </div>
-            </div>
-          </nav>
+</div>
 
-          {/* MOBILE TOGGLE */}
-          <button
-            className="lg:hidden text-blue-900"
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        </div>
 
-        {/* MOBILE MENU */}
-        {mobileOpen && (
-          <div className="lg:hidden bg-[#f3f0e6] border-t border-yellow-600 px-6 py-6 space-y-4">
-            {menu.map((item) => (
-              <div key={item.name}>
-                {item.submenu ? (
-                  <>
-                    <button
-                      onClick={() =>
-                        setActiveMobile(
-                          activeMobile === item.name ? null : item.name
-                        )
-                      }
-                      className="flex justify-between w-full font-medium text-gray-800"
-                    >
-                      {item.name}
-                      <ChevronDown size={18} />
-                    </button>
+{/* ================= NAVBAR ================= */}
 
-                    {activeMobile === item.name && (
-                      <div className="pl-4 mt-2 space-y-2">
-                        {item.submenu.map((sub) => (
-                          <Link
-                            key={sub.href}
-                            href={sub.href}
-                            onClick={() => setMobileOpen(false)}
-                            className="block text-sm text-gray-600 hover:text-blue-900"
-                          >
-                            {sub.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <Link
-                    href={item.href || "#"}
-                    onClick={() => setMobileOpen(false)}
-                    className="block font-medium text-gray-800"
-                  >
-                    {item.name}
-                  </Link>
-                )}
-              </div>
-            ))}
+<div className="bg-white shadow-sm">
 
-            <div className="pt-4 border-t">
-              <p className="text-sm font-semibold mb-2">ERP Login</p>
-              <Link href="/erp/student" className="block text-sm py-1">
-                Student
-              </Link>
-              <Link target="_blank" href="https://schoolerpindia.net/school/royal/" className="block text-sm py-1">
-                Teacher
-              </Link>
-              <Link href="/erp/admin" className="block text-sm py-1">
-                Admin
-              </Link>
-            </div>
-          </div>
-        )}
-      </div>
-    </header>
+<div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-22.5 relative">
+
+{/* LEFT MENU */}
+
+<nav className="hidden lg:flex items-center gap-10 text-sm font-medium">
+
+{menu.slice(0,5).map((item)=>(
+
+<div key={item.name} className="relative group">
+
+<Link href={item.href} className="flex items-center gap-1 hover:text-blue-900">
+
+{item.name}
+
+{item.submenu && <ChevronDown size={14}/>}
+
+</Link>
+
+{item.submenu && (
+
+<div className="absolute top-full mt-3 left-0 bg-white shadow-xl rounded-xl w-56
+opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+
+{item.submenu.map((sub)=>(
+
+<Link
+key={sub.name}
+href={sub.href}
+className="block px-5 py-3 text-sm text-black hover:bg-blue-50"
+>
+
+{sub.name}
+
+</Link>
+
+))}
+
+</div>
+
+)}
+
+</div>
+
+))}
+
+</nav>
+
+
+{/* LOGO */}
+
+<Link
+href="/"
+className="absolute left-1/2 -translate-x-1/2 top-[25%] -translate-y-1/2
+bg-white rounded-full shadow-xl border border-white"
+>
+
+<img
+src="/images/logo-royal.png"
+alt="Royal Public School"
+className="h-30 w-auto"
+/>
+
+</Link>
+
+
+{/* RIGHT MENU */}
+
+<nav className="hidden lg:flex items-center gap-10 text-sm font-medium">
+
+{menu.slice(5).map((item)=>(
+
+<div key={item.name} className="relative group">
+
+<Link href={item.href} className="flex items-center gap-1 hover:text-blue-900">
+
+{item.name}
+
+{item.submenu && <ChevronDown size={14}/>}
+
+</Link>
+
+{item.submenu && (
+
+<div className="absolute top-full mt-3 left-0 bg-white shadow-xl rounded-xl w-56
+opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+
+{item.submenu.map((sub)=>(
+
+<Link
+key={sub.name}
+href={sub.href}
+className="block px-5 py-3 text-sm text-black hover:bg-blue-50"
+>
+
+{sub.name}
+
+</Link>
+
+))}
+
+</div>
+
+)}
+
+</div>
+
+))}
+
+{/* ERP BUTTON */}
+
+<div
+className="relative"
+onMouseEnter={()=>setErpOpen(true)}
+onMouseLeave={()=>setErpOpen(false)}
+>
+
+<button className="bg-[#C49A3B] text-white px-4 py-2 rounded-md text-sm font-semibold flex items-center gap-1 shadow-md">
+
+ERP Login
+
+<ChevronDown size={14}/>
+
+</button>
+
+<div
+className={`absolute right-0 top-full mt-2 w-52 bg-white rounded-xl shadow-xl border border-gray-100
+overflow-hidden transition-all duration-300
+${erpOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
+>
+
+<Link href="/erp/student" className="block px-4 py-3 text-sm text-black hover:bg-blue-50">
+🎓 Student Login
+</Link>
+
+<Link href="/erp/parent" className="block px-4 py-3 text-sm text-black hover:bg-blue-50">
+👨‍👩‍👧 Parent Login
+</Link>
+
+<Link href="/erp/teacher" className="block px-4 py-3 text-sm text-black hover:bg-blue-50">
+👨‍🏫 Teacher Login
+</Link>
+
+<Link href="/erp/admin" className="block px-4 py-3 text-sm text-black hover:bg-blue-50">
+⚙ Admin Panel
+</Link>
+
+</div>
+
+</div>
+
+</nav>
+
+
+{/* MOBILE BUTTON */}
+
+<button
+className="lg:hidden"
+onClick={()=>setMobileOpen(!mobileOpen)}
+>
+
+{mobileOpen ? <X size={28}/> : <Menu size={28}/>}
+
+</button>
+
+</div>
+
+<div className="h-0.5 bg-linear-to-r from-transparent via-[#C49A3B] to-transparent"></div>
+
+</div>
+
+
+{/* ================= MOBILE MENU ================= */}
+
+{mobileOpen && (
+
+<div className="lg:hidden bg-white shadow-md px-6 py-6">
+
+{menu.map((item)=>(
+
+<div key={item.name} className="mb-3">
+
+<button
+className="flex justify-between w-full font-medium"
+onClick={()=>setOpenSub(openSub === item.name ? null : item.name)}
+>
+
+{item.name}
+
+{item.submenu && <ChevronDown size={16}/>}
+
+</button>
+
+{item.submenu && openSub === item.name && (
+
+<div className="ml-4 mt-2 space-y-2">
+
+{item.submenu.map((sub)=>(
+
+<Link
+key={sub.name}
+href={sub.href}
+className="block text-sm text-gray-600"
+>
+
+{sub.name}
+
+</Link>
+
+))}
+
+</div>
+
+)}
+
+</div>
+
+))}
+
+</div>
+
+)}
+
+</header>
+
   );
 }

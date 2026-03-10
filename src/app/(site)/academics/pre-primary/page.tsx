@@ -5,14 +5,7 @@ export default function PrePrimaryPage() {
     <>
       {/* ================= HERO ================= */}
       <section
-        className="relative w-full min-h-[50vh] flex items-center justify-center text-white overflow-hidden"
-        style={{
-          backgroundImage: "url('/images/pre-primary.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute inset-0 bg-linear-to-r from-blue-900/80 via-black/60 to-black/70"></div>
+        className="relative w-full min-h-[50vh] flex items-center justify-center text-white overflow-hidden sitepage-banner">
 
         <div className="relative z-10 text-center px-8">
           <p className="uppercase tracking-[4px] text-sm opacity-80 mb-6">

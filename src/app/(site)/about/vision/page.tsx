@@ -3,22 +3,10 @@ import Image from "next/image";
 export default function VisionMissionPage() {
   return (
     <>
-      {/* HERO */}
+      
       {/* VISION & MISSION – CINEMATIC HERO */}
         <section
-        className="relative w-full min-h-[65vh] flex items-center justify-center text-white overflow-hidden"
-        style={{
-            backgroundImage: "url('/images/about-vision.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-        }}
-        >
-
-        {/* Dark + Blue Gradient Overlay */}
-        <div className="absolute inset-0 bg-linear-to-r from-blue-900/80 via-black/60 to-black/70"></div>
-
-        {/* Soft Blur Layer (Premium Depth Effect) */}
-        <div className="absolute inset-0 backdrop-blur-[2px]"></div>
+      className="relative w-full h-105 flex items-center justify-center text-center text-white overflow-hidden sitepage-banner"> 
 
         {/* Content */}
         <div className="relative z-10 max-w-5xl mx-auto px-10 lg:px-20 text-center">

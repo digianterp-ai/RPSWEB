@@ -7,13 +7,7 @@ export default function PrincipalPage() {
     <>
       {/* ================= HERO ================= */}
       <section
-        className="relative w-full min-h-[50vh] flex items-center justify-center text-white overflow-hidden"
-        style={{
-          backgroundImage: "url('/images/about-vision.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
+        className="relative w-full min-h-[50vh] flex items-center justify-center text-white overflow-hidden sitepage-banner">
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-linear-to-rrom-blue-900/85 via-black/70 to-black/80"></div>
 

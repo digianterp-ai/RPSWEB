@@ -6,14 +6,7 @@ export default function AcademicsPage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative w-full min-h-[50vh] flex items-center justify-center text-white overflow-hidden"
-        style={{
-          backgroundImage: "url('/images/academics-hero.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute inset-0 bg-linear-to-r from-blue-900/85 via-black/70 to-black/80"></div>
+      <section className="relative w-full min-h-[50vh] flex items-center justify-center text-white overflow-hidden sitepage-banner">
 
         <div className="relative z-10 text-center px-8">
           <p className="uppercase tracking-[4px] text-sm opacity-80 mb-6">

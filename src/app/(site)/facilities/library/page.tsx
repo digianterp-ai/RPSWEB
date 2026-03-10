@@ -3,7 +3,8 @@
 export default function LibraryPage() {
   return (
     <>
-      <section className="w-full bg-blue-600 text-white py-28 text-center">
+      <section
+        className="relative w-full min-h-[30vh] flex items-center justify-center text-white overflow-hidden sitepage-banner">
         <h1 className="text-4xl font-bold">Library & Reading Hall</h1>
       </section>
 

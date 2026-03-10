@@ -1,0 +1,173 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model ContactEnquiry {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  enquiryId String   @unique
+  name      String
+  email     String
+  phone     String?
+  message   String
+  status    String   @default("NEW")
+  createdAt DateTime @default(now())
+}
+
+
+model Student {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  firstName String
+  lastName  String
+
+  gender String
+
+  dateOfBirth DateTime
+
+  admissionNumber String
+
+  classId String? @db.ObjectId
+
+  createdAt DateTime @default(now())
+
+}
+
+model Parent {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  fatherName String
+  motherName String
+
+  phone String
+  email String?
+
+  address String?
+
+  createdAt DateTime @default(now())
+
+}
+
+model Teacher {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+
+  phone String
+  email String?
+
+  subject String?
+
+  joiningDate DateTime
+
+  createdAt DateTime @default(now())
+
+}
+
+model Class {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+
+  createdAt DateTime @default(now())
+
+}
+
+model Section {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+
+  classId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+
+}
+
+model Subject {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+
+  classId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+
+}
+
+model FeeStructure {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  classId String @db.ObjectId
+
+  admissionFee Int
+  monthlyFee Int
+  examFee Int
+
+  createdAt DateTime @default(now())
+
+}
+
+model FeePayment {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentId String @db.ObjectId
+
+  amount Int
+
+  paymentDate DateTime
+
+  method String
+
+  createdAt DateTime @default(now())
+
+}
+
+model Attendance {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentId String @db.ObjectId
+
+  date DateTime
+
+  status String
+
+  createdAt DateTime @default(now())
+
+}
+
+model Admission {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  enquiryId String? @db.ObjectId
+
+  studentName String
+
+  fatherName String
+  motherName String
+
+  phone String
+  email String?
+
+  classApplied String
+
+  status String @default("Pending")
+
+  createdAt DateTime @default(now())
+
+}
+
