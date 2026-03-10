@@ -1,5 +1,6 @@
 "use client";
 
+
 export default function EnquiryList({ enquiries }: any) {
 
   const convertEnquiry = async (id: string) => {

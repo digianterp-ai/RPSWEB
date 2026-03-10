@@ -1,6 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import EnquiryList from "../../../components/erp/EnquiryList";
 
+
+
+export const dynamic = "force-dynamic";
+
 async function getEnquiries() {
   return await prisma.contactEnquiry.findMany({
     orderBy: { createdAt: "desc" },
@@ -8,7 +12,9 @@ async function getEnquiries() {
 }
 
 export default async function EnquiriesPage() {
+
   const enquiries = await getEnquiries();
+  console.log("ENQUIRIES:", enquiries);
 
   return (
     <div>
@@ -18,6 +24,8 @@ export default async function EnquiriesPage() {
       </h1>
 
       <EnquiryList enquiries={enquiries} />
+
+      
 
     </div>
   );
