@@ -150,8 +150,7 @@ export default function ContactPage() {
             </h3>
 
             <p className="text-gray-600">
-              info@royalpublicschool.com <br />
-              admissions@royalpublicschool.com
+              info@rpsdeori.org
             </p>
 
           </div>
