@@ -257,16 +257,18 @@ export default function ContactPage() {
 
       {/* GOOGLE MAP */}
 
-      <section className="w-full h-112.5">
+      <section className="w-full h-112.5">     
 
         <iframe
-          src="https://www.google.com/maps?q=Deori,Sagar,Madhya%20Pradesh&output=embed"
+          src="https://www.google.com/maps?q=23.380083,78.997722&output=embed"
           width="100%"
           height="100%"
           loading="lazy"
+          allowFullScreen
+          referrerPolicy="no-referrer-when-downgrade"
           className="border-0"
         ></iframe>
-
+        
       </section>
 
     </>
