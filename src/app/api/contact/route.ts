@@ -28,7 +28,7 @@ export async function POST(req: Request) {
 
     }
 
-    console.log("STEP 3: Validation passed");
+    console.log("STEP 3: Validation passed"); 
 
     /* ================================
    GENERATE ENQUIRY ID
