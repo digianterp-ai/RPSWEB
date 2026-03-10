@@ -130,8 +130,8 @@ export default function ContactPage() {
             </h3>
 
             <p className="text-gray-600">
-              +91 12345 98765 <br />
-              +91 98765 43210
+              +91 79873 14617 <br />
+              +91 99813 06699
             </p>
 
           </div>
