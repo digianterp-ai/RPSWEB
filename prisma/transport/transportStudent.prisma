@@ -1,0 +1,8 @@
+model TransportStudent {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentId String @db.ObjectId
+  routeId String @db.ObjectId
+
+}

@@ -1,0 +1,11 @@
+model Marks {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  examId String @db.ObjectId
+  studentAcademicId String @db.ObjectId
+  subjectId String @db.ObjectId
+
+  marks Float
+
+}

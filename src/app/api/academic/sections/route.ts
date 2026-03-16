@@ -1,0 +1,25 @@
+import { NextResponse } from "next/server"
+import { prisma } from "@/lib/prisma"
+
+export async function GET() {
+
+  const sections = await prisma.section.findMany()
+
+  return NextResponse.json(sections)
+
+}
+
+export async function POST(req: Request) {
+
+  const body = await req.json()
+
+  const section = await prisma.section.create({
+    data: {
+      name: body.name,
+      classId: body.classId
+    }
+  })
+
+  return NextResponse.json(section)
+
+}

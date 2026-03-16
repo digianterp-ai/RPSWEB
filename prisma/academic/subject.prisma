@@ -1,0 +1,10 @@
+model Subject {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+  code String?
+
+  createdAt DateTime @default(now())
+
+}

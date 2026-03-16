@@ -1,0 +1,9 @@
+model Vehicle {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  vehicleNo String
+  driver String
+  phone String
+
+}

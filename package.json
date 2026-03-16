@@ -7,19 +7,29 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postinstall": "prisma generate"
+    "prisma:merge": "node scripts/merge-prisma.js",
+    "prisma:generate": "npm run prisma:merge && prisma generate --schema=prisma/schema.generated.prisma",
+    "prisma:push": "npm run prisma:merge && prisma db push --schema=prisma/schema.generated.prisma",
+    "prisma:studio": "npm run prisma:merge && prisma studio --schema=prisma/schema.generated.prisma",
+    "prisma:reset": "npm run prisma:merge && prisma db push --force-reset --schema=prisma/schema.generated.prisma",
+    "postinstall": "npm run prisma:generate",
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
-    "@prisma/client": "^5.22.0",
+    "@prisma/client": "^6.19.2",
+    "bcryptjs": "^3.0.3",
+    "jsonwebtoken": "^9.0.3",
     "lucide-react": "^0.575.0",
     "next": "16.1.6",
     "nodemailer": "^8.0.2",
-    "prisma": "^5.22.0",
+    "prisma": "^6.19.2",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/bcryptjs": "^3.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20",
     "@types/nodemailer": "^7.0.11",
     "@types/react": "^19",
@@ -27,6 +37,8 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

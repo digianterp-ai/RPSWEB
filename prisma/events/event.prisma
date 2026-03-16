@@ -1,0 +1,10 @@
+model Event {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  title String
+  description String
+
+  eventDate DateTime
+
+}

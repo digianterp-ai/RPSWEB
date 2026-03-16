@@ -1,0 +1,12 @@
+model FeeDiscount {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentId String @db.ObjectId
+
+  amount Int
+  reason String?
+
+  createdAt DateTime @default(now())
+
+}

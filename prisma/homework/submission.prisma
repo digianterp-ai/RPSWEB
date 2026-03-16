@@ -1,0 +1,14 @@
+model HomeworkSubmission {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  homeworkId String @db.ObjectId
+  studentId String @db.ObjectId
+
+  fileUrl String?
+
+  status HomeworkStatus
+
+  submittedAt DateTime?
+
+}

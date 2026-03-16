@@ -1,0 +1,18 @@
+model FeePayment {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentId String @db.ObjectId
+  studentFeeId String? @db.ObjectId
+
+  amount Int
+  paymentDate DateTime
+
+  method PaymentMethod
+
+  receiptNo String?
+  referenceId String?
+
+  createdAt DateTime @default(now())
+
+}

@@ -1,0 +1,17 @@
+model ExamResult {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  examId String @db.ObjectId
+  studentId String @db.ObjectId
+  subjectId String @db.ObjectId
+
+  marks Float
+
+  grade String?
+  status String?
+  remark String?
+
+  createdAt DateTime @default(now())
+
+}

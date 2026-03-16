@@ -1,0 +1,20 @@
+model StudentPromotion {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentId String @db.ObjectId
+
+  fromClassId String @db.ObjectId
+  toClassId String @db.ObjectId
+
+  fromSectionId String @db.ObjectId
+  toSectionId String @db.ObjectId
+
+  fromAcademicYearId String @db.ObjectId
+  toAcademicYearId String @db.ObjectId
+
+  promotedBy String? @db.ObjectId
+
+  promotedAt DateTime @default(now())
+
+}

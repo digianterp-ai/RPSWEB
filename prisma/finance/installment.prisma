@@ -1,0 +1,12 @@
+model FeeInstallment {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+  dueDate DateTime
+
+  academicYearId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+
+}

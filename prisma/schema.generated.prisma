@@ -1,0 +1,682 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Class {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+
+  branchId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+
+}
+
+model Section {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+
+  classId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+
+}
+
+model Subject {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+  code String?
+
+  createdAt DateTime @default(now())
+
+}
+
+model Period {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+
+  startTime String
+  endTime String
+
+  order Int
+
+  createdAt DateTime @default(now())
+
+}
+
+model Timetable {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  classId String @db.ObjectId
+  sectionId String @db.ObjectId
+
+  subjectId String @db.ObjectId
+  teacherId String @db.ObjectId
+
+  periodId String @db.ObjectId
+
+  day WeekDay
+
+  createdAt DateTime @default(now())
+
+}
+
+model Admission {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentName String
+  fatherName String
+  motherName String
+
+  phone String
+  email String?
+
+  classApplied String
+
+  status AdmissionStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+
+}
+
+model Attendance {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentAcademicId String @db.ObjectId
+
+  date DateTime
+
+  status AttendanceStatus
+
+  createdAt DateTime @default(now())
+
+}
+
+model AcademicYear {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+
+  branchId String @db.ObjectId
+
+  startDate DateTime
+  endDate DateTime
+
+  isActive Boolean @default(false)
+
+  createdAt DateTime @default(now())
+
+}
+
+model Branch {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+  code String?
+
+  address String?
+  phone String?
+
+  createdAt DateTime @default(now())
+}
+
+model Permission {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  module String
+  action String
+
+  description String?
+
+}
+
+model RolePermission {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  role Role
+
+  permissionId String @db.ObjectId
+
+}
+
+model ContactEnquiry {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  enquiryId String @unique
+
+  name String
+  email String
+  phone String?
+
+  message String
+
+  status String @default("NEW")
+
+  createdAt DateTime @default(now())
+
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String   @unique
+  password  String
+  role      Role
+  createdAt DateTime @default(now())
+}
+
+///////////////////////////////////////////////////////
+/// ROLE SYSTEM
+///////////////////////////////////////////////////////
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  TEACHER
+  STUDENT
+  PARENT
+  STAFF
+}
+
+///////////////////////////////////////////////////////
+/// ATTENDANCE
+///////////////////////////////////////////////////////
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  LEAVE
+}
+
+///////////////////////////////////////////////////////
+/// ADMISSION
+///////////////////////////////////////////////////////
+
+enum AdmissionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+///////////////////////////////////////////////////////
+/// HOMEWORK
+///////////////////////////////////////////////////////
+
+enum HomeworkStatus {
+  PENDING
+  SUBMITTED
+  REVIEWED
+}
+
+///////////////////////////////////////////////////////
+/// PAYMENTS
+///////////////////////////////////////////////////////
+
+enum PaymentMethod {
+  CASH
+  UPI
+  CARD
+  BANK_TRANSFER
+  ONLINE
+}
+
+///////////////////////////////////////////////////////
+/// TIMETABLE
+///////////////////////////////////////////////////////
+
+enum WeekDay {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+}
+
+///////////////////////////////////////////////////////
+/// STUDENT STATUS
+///////////////////////////////////////////////////////
+
+enum StudentStatus {
+  ACTIVE
+  INACTIVE
+  ALUMNI
+}
+
+
+///////////////////////////////////////////////////////
+/// FEE STATUS
+///////////////////////////////////////////////////////
+
+
+enum FeeStatus {
+  PENDING
+  PARTIAL
+  PAID
+}
+
+model Event {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  title String
+  description String
+
+  eventDate DateTime
+
+}
+
+model Exam {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+
+  academicYearId String @db.ObjectId
+
+  startDate DateTime?
+  endDate DateTime?
+
+  createdAt DateTime @default(now())
+
+}
+
+model GradeScale {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  grade String
+
+  minMarks Int
+  maxMarks Int
+
+  remark String?
+
+}
+
+model Marks {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  examId String @db.ObjectId
+  studentAcademicId String @db.ObjectId
+  subjectId String @db.ObjectId
+
+  marks Float
+
+}
+
+model ReportCard {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentId String @db.ObjectId
+  examId String @db.ObjectId
+
+  totalMarks Float
+  percentage Float
+
+  result String
+  division String?
+
+  createdAt DateTime @default(now())
+
+}
+
+model ExamResult {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  examId String @db.ObjectId
+  studentId String @db.ObjectId
+  subjectId String @db.ObjectId
+
+  marks Float
+
+  grade String?
+  status String?
+  remark String?
+
+  createdAt DateTime @default(now())
+
+}
+
+model ExamSchedule {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  examId String @db.ObjectId
+
+  classId String @db.ObjectId
+  sectionId String? @db.ObjectId
+
+  subjectId String @db.ObjectId
+
+  examDate DateTime
+
+  maxMarks Int
+  passMarks Int
+
+}
+
+model FeeDiscount {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentId String @db.ObjectId
+
+  amount Int
+  reason String?
+
+  createdAt DateTime @default(now())
+
+}
+
+model FeeCategory {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+  description String?
+
+}
+
+model FeeStructure {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  classId String @db.ObjectId
+  categoryId String @db.ObjectId
+
+  academicYearId String @db.ObjectId
+
+  amount Int
+
+}
+
+model FeeInstallment {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+  dueDate DateTime
+
+  academicYearId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+
+}
+
+model FeePayment {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentId String @db.ObjectId
+  studentFeeId String? @db.ObjectId
+
+  amount Int
+  paymentDate DateTime
+
+  method PaymentMethod
+
+  receiptNo String?
+  referenceId String?
+
+  createdAt DateTime @default(now())
+
+}
+
+model StudentFee {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentId String @db.ObjectId
+  installmentId String @db.ObjectId
+
+  totalAmount Int
+  paidAmount Int @default(0)
+  dueAmount Int
+
+  status String @default("PENDING")
+
+  createdAt DateTime @default(now())
+
+}
+
+model Homework {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  title String
+  description String
+
+  classId String @db.ObjectId
+  subjectId String @db.ObjectId
+
+  teacherId String @db.ObjectId
+
+  academicYearId String @db.ObjectId
+
+  dueDate DateTime
+
+  createdAt DateTime @default(now())
+
+}
+
+model HomeworkSubmission {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  homeworkId String @db.ObjectId
+  studentId String @db.ObjectId
+
+  fileUrl String?
+
+  status HomeworkStatus
+
+  submittedAt DateTime?
+
+}
+
+model InventoryItem {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+  quantity Int
+
+}
+
+model Book {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  title String
+  author String
+
+  isbn String?
+  quantity Int
+
+}
+
+model BookIssue {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  bookId String @db.ObjectId
+  studentId String @db.ObjectId
+
+  issueDate DateTime
+  returnDate DateTime?
+
+}
+
+model StudentDocument {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentId String @db.ObjectId
+
+  name String
+  fileUrl String
+
+  createdAt DateTime @default(now())
+
+}
+
+model Parent {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  fatherName String
+  motherName String
+
+  phone String
+  email String?
+
+  address String?
+
+  createdAt DateTime @default(now())
+
+}
+
+model StudentPromotion {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentId String @db.ObjectId
+
+  fromClassId String @db.ObjectId
+  toClassId String @db.ObjectId
+
+  fromSectionId String @db.ObjectId
+  toSectionId String @db.ObjectId
+
+  fromAcademicYearId String @db.ObjectId
+  toAcademicYearId String @db.ObjectId
+
+  promotedBy String? @db.ObjectId
+
+  promotedAt DateTime @default(now())
+
+}
+
+model Student {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  admissionNumber String @unique
+
+  firstName String
+  lastName String
+
+  gender String
+  dateOfBirth DateTime
+
+  photo String?
+
+  parentId String? @db.ObjectId
+  userId String? @db.ObjectId
+
+  branchId String @db.ObjectId
+
+  status String @default("ACTIVE")
+
+  createdAt DateTime @default(now())
+
+}
+
+model StudentAcademic {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentId String @db.ObjectId
+
+  classId String @db.ObjectId
+  sectionId String @db.ObjectId
+
+  academicYearId String @db.ObjectId
+
+  branchId String @db.ObjectId
+
+  rollNumber Int?
+
+  status String @default("ACTIVE")
+
+  createdAt DateTime @default(now())
+
+}
+
+model Counter {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  key String @unique
+
+  value Int @default(0)
+
+}
+
+model Notification {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  title String
+  message String
+
+  userRole Role?
+  studentId String?
+
+  createdAt DateTime @default(now())
+
+}
+
+model Route {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+
+  vehicleId String @db.ObjectId
+
+}
+
+model TransportStudent {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentId String @db.ObjectId
+  routeId String @db.ObjectId
+
+}
+
+model Vehicle {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  vehicleNo String
+  driver String
+  phone String
+
+}

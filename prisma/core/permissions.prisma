@@ -1,0 +1,38 @@
+model Permission {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  module String
+  action String
+
+  description String?
+
+}
+
+model RolePermission {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  role Role
+
+  permissionId String @db.ObjectId
+
+}
+
+model ContactEnquiry {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  enquiryId String @unique
+
+  name String
+  email String
+  phone String?
+
+  message String
+
+  status String @default("NEW")
+
+  createdAt DateTime @default(now())
+
+}

@@ -1,0 +1,11 @@
+model BookIssue {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  bookId String @db.ObjectId
+  studentId String @db.ObjectId
+
+  issueDate DateTime
+  returnDate DateTime?
+
+}

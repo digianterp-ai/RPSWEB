@@ -1,0 +1,14 @@
+model Exam {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+
+  academicYearId String @db.ObjectId
+
+  startDate DateTime?
+  endDate DateTime?
+
+  createdAt DateTime @default(now())
+
+}

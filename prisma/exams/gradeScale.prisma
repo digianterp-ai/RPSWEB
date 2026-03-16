@@ -1,0 +1,12 @@
+model GradeScale {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  grade String
+
+  minMarks Int
+  maxMarks Int
+
+  remark String?
+
+}

@@ -1,0 +1,11 @@
+model Branch {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+  code String?
+
+  address String?
+  phone String?
+
+  createdAt DateTime @default(now())
+}

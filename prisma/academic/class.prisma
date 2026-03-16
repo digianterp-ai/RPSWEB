@@ -1,0 +1,11 @@
+model Class {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+
+  branchId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+
+}

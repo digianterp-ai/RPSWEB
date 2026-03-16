@@ -1,0 +1,16 @@
+model ReportCard {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentId String @db.ObjectId
+  examId String @db.ObjectId
+
+  totalMarks Float
+  percentage Float
+
+  result String
+  division String?
+
+  createdAt DateTime @default(now())
+
+}

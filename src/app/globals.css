@@ -116,3 +116,38 @@ html {
 .animate-fadeIn {
   animation: fadeIn .25s ease;
 }
+
+/* Premium Thin Scrollbar */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(120,120,120,0.3);
+  border-radius: 20px;
+  transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(120,120,120,0.6);
+}
+
+/* Firefox */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(120,120,120,0.3) transparent;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  opacity: 0;
+}
+
+.sidebar-scroll:hover::-webkit-scrollbar-thumb {
+  opacity: 1;
+}

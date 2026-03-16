@@ -1,0 +1,13 @@
+model Attendance {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentAcademicId String @db.ObjectId
+
+  date DateTime
+
+  status AttendanceStatus
+
+  createdAt DateTime @default(now())
+
+}

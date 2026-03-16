@@ -1,0 +1,24 @@
+model Student {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  admissionNumber String @unique
+
+  firstName String
+  lastName String
+
+  gender String
+  dateOfBirth DateTime
+
+  photo String?
+
+  parentId String? @db.ObjectId
+  userId String? @db.ObjectId
+
+  branchId String @db.ObjectId
+
+  status String @default("ACTIVE")
+
+  createdAt DateTime @default(now())
+
+}

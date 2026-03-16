@@ -1,0 +1,18 @@
+model Admission {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentName String
+  fatherName String
+  motherName String
+
+  phone String
+  email String?
+
+  classApplied String
+
+  status AdmissionStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+
+}

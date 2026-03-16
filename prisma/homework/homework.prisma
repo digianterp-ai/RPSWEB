@@ -1,0 +1,19 @@
+model Homework {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  title String
+  description String
+
+  classId String @db.ObjectId
+  subjectId String @db.ObjectId
+
+  teacherId String @db.ObjectId
+
+  academicYearId String @db.ObjectId
+
+  dueDate DateTime
+
+  createdAt DateTime @default(now())
+
+}

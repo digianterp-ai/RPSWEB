@@ -1,0 +1,16 @@
+model StudentFee {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  studentId String @db.ObjectId
+  installmentId String @db.ObjectId
+
+  totalAmount Int
+  paidAmount Int @default(0)
+  dueAmount Int
+
+  status String @default("PENDING")
+
+  createdAt DateTime @default(now())
+
+}

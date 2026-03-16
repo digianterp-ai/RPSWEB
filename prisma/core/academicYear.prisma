@@ -1,0 +1,16 @@
+model AcademicYear {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+
+  branchId String @db.ObjectId
+
+  startDate DateTime
+  endDate DateTime
+
+  isActive Boolean @default(false)
+
+  createdAt DateTime @default(now())
+
+}

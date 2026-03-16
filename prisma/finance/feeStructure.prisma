@@ -1,0 +1,12 @@
+model FeeStructure {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  classId String @db.ObjectId
+  categoryId String @db.ObjectId
+
+  academicYearId String @db.ObjectId
+
+  amount Int
+
+}

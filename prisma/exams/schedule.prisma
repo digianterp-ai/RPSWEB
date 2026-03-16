@@ -1,0 +1,17 @@
+model ExamSchedule {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  examId String @db.ObjectId
+
+  classId String @db.ObjectId
+  sectionId String? @db.ObjectId
+
+  subjectId String @db.ObjectId
+
+  examDate DateTime
+
+  maxMarks Int
+  passMarks Int
+
+}

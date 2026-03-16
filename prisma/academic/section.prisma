@@ -1,0 +1,11 @@
+model Section {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+
+  classId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+
+}

@@ -80,7 +80,7 @@ export default function Footer() {
         {/* DIVIDER */}
         <div className="border-t border-white/20 pt-8 text-center text-sm opacity-70">
           MP Board Affiliated | CBSE Affiliation Proposed, © {new Date().getFullYear()} Royal Public School. All Rights Reserved. <br />
-          EduIntellect™ Pilot Lab – An Inkmatik Invision
+          EduIntellect™ Pilot Lab - An Inkmatik Research Initiative
         </div>
 
       </div>

@@ -1,0 +1,32 @@
+model Period {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name String
+
+  startTime String
+  endTime String
+
+  order Int
+
+  createdAt DateTime @default(now())
+
+}
+
+model Timetable {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  classId String @db.ObjectId
+  sectionId String @db.ObjectId
+
+  subjectId String @db.ObjectId
+  teacherId String @db.ObjectId
+
+  periodId String @db.ObjectId
+
+  day WeekDay
+
+  createdAt DateTime @default(now())
+
+}

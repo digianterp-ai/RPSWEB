@@ -1,0 +1,13 @@
+model Notification {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  title String
+  message String
+
+  userRole Role?
+  studentId String?
+
+  createdAt DateTime @default(now())
+
+}

@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import EnquiryList from "../../../components/erp/EnquiryList";
+import EnquiryList from "../../../../components/erp/EnquiryList";
 
 
 
