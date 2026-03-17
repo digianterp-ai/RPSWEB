@@ -1,29 +1,25 @@
-import { NextResponse } from "next/server"
-import { prisma } from "@/lib/prisma"
-import { generateAdmissionNumber } from "@/lib/generateAdmissionNumber"
-
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+import { generateAdmissionNumber } from "@/lib/generateAdmissionNumber";
 
 // GET students list
 export async function GET() {
-
   const students = await prisma.student.findMany({
     orderBy: {
-      createdAt: "desc"
-    }
-  })
+      createdAt: "desc",
+    },
+  });
 
-  return NextResponse.json(students)
-
+  return NextResponse.json(students);
 }
-
-
 
 // CREATE student
 export async function POST(req: Request) {
+  const body = await req.json();
 
-  const body = await req.json()
+  const admissionNumber = await generateAdmissionNumber();
 
-  const admissionNumber = await generateAdmissionNumber()
+  const branchId = "branch_001"; // ✅ TEMP FIX
 
   const student = await prisma.student.create({
     data: {
@@ -31,19 +27,22 @@ export async function POST(req: Request) {
       lastName: body.lastName,
       gender: body.gender,
       dateOfBirth: new Date(body.dateOfBirth),
-      admissionNumber
-    }
-  })
+      admissionNumber,
+
+      branchId, // ✅ REQUIRED
+    },
+  });
 
   await prisma.studentAcademic.create({
     data: {
       studentId: student.id,
       classId: body.classId,
       sectionId: body.sectionId,
-      academicYearId: body.academicYearId
-    }
-  })
+      academicYearId: body.academicYearId,
 
-  return NextResponse.json(student)
+      branchId, // ✅ ADD HERE ALSO (IMPORTANT)
+    },
+  });
 
+  return NextResponse.json(student);
 }

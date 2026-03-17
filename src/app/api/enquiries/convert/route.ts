@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma";
 
 export async function POST(req: Request) {
-
   const { enquiryId } = await req.json();
 
   const enquiry = await prisma.contactEnquiry.findUnique({
@@ -14,7 +13,7 @@ export async function POST(req: Request) {
 
   await prisma.admission.create({
     data: {
-      enquiryId: enquiry.id,
+      // ❌ removed enquiryId
       studentName: enquiry.name,
       phone: enquiry.phone || "",
       email: enquiry.email,
@@ -30,5 +29,4 @@ export async function POST(req: Request) {
   });
 
   return Response.json({ success: true });
-
 }
