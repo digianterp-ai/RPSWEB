@@ -210,7 +210,7 @@ export default function Header() {
               {/* Text + Icon */}
               <span className="relative z-10 group-hover:text-white duration-300 flex items-center gap-2">
                 <LogIn className="transition-transform duration-300 group-hover:translate-x-1" size={16} />
-                ERP Login »
+                ERP Login
               </span>
             </Link>
           </nav>
