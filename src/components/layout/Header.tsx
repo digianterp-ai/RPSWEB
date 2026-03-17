@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X, Search, ChevronDown } from "lucide-react";
+import { LogIn } from "lucide-react";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openSub, setOpenSub] = useState<string | null>(null);
-  const [erpOpen, setErpOpen] = useState(false);
 
   const menu = [
     { name: "Home", href: "/" },
@@ -84,17 +84,17 @@ export default function Header() {
   return (
     <header className="w-full fixed top-0 left-0 z-50">
       {/* ================= TOP BAR ================= */}
-
       <div className="bg-[#0B1F3A] text-white text-xs">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-4 lg:px-6 py-2">
           <div className="flex gap-3 md:gap-6">
             <span className="whitespace-nowrap">+91 79873 14617</span>
-
             <span className="hidden md:inline">info@rpsdeori.org</span>
           </div>
 
           <div className="flex items-center gap-4">
-            <span className="hidden sm:inline">MP Board Affiliated School</span>
+            <span className="hidden sm:inline">
+              MP Board Affiliated School
+            </span>
 
             <button className="w-7 h-7 bg-white text-[#0B1F3A] rounded-full flex items-center justify-center">
               <Search size={14} />
@@ -104,11 +104,9 @@ export default function Header() {
       </div>
 
       {/* ================= NAVBAR ================= */}
-
       <div className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-4 lg:px-6 h-20 lg:h-24 relative">
           {/* MOBILE MENU BUTTON */}
-
           <button
             className="lg:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -117,7 +115,6 @@ export default function Header() {
           </button>
 
           {/* LEFT MENU */}
-
           <nav className="hidden lg:flex items-center gap-10 text-sm font-medium">
             {menu.slice(0, 5).map((item) => (
               <div key={item.name} className="relative group">
@@ -126,15 +123,11 @@ export default function Header() {
                   className="flex items-center gap-1 hover:text-blue-900"
                 >
                   {item.name}
-
                   {item.submenu && <ChevronDown size={14} />}
                 </Link>
 
                 {item.submenu && (
-                  <div
-                    className="absolute top-full mt-3 left-0 bg-white shadow-xl rounded-xl w-56
-opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300"
-                  >
+                  <div className="absolute top-full mt-3 left-0 bg-white shadow-xl rounded-xl w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                     {item.submenu.map((sub) => (
                       <Link
                         key={sub.name}
@@ -151,7 +144,6 @@ opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all d
           </nav>
 
           {/* LOGO */}
-
           <Link
             href="/"
             className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:-top-7 flex justify-center"
@@ -163,8 +155,7 @@ opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all d
             />
           </Link>
 
-          {/* RIGHT MENU */}
-
+          {/* RIGHT MENU */} 
           <nav className="hidden lg:flex items-center gap-10 text-sm font-medium">
             {menu.slice(5).map((item) => (
               <div key={item.name} className="relative group">
@@ -173,15 +164,11 @@ opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all d
                   className="flex items-center gap-1 hover:text-blue-900"
                 >
                   {item.name}
-
                   {item.submenu && <ChevronDown size={14} />}
                 </Link>
 
                 {item.submenu && (
-                  <div
-                    className="absolute top-full mt-3 left-0 bg-white shadow-xl rounded-xl w-56
-opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300"
-                  >
+                  <div className="absolute top-full mt-3 left-0 bg-white shadow-xl rounded-xl w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                     {item.submenu.map((sub) => (
                       <Link
                         key={sub.name}
@@ -196,52 +183,36 @@ opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all d
               </div>
             ))}
 
-            {/* ERP BUTTON */}
-
-            <div
-              className="relative"
-              onMouseEnter={() => setErpOpen(true)}
-              onMouseLeave={() => setErpOpen(false)}
+           
+            {/* ERP BUTTON - ROYAL BLUE SYSTEM STYLE */}
+            <Link
+              href="/login"
+              className="relative overflow-hidden px-6 py-2.5 rounded-lg text-sm font-semibold text-[#0B3D91] bg-[#ffffff] border-2 border-[#1E5ED8] group transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
             >
-              <button className="bg-[#C49A3B] text-white px-4 py-2 rounded-md text-sm font-semibold flex items-center gap-1 shadow-md">
+              {/* Liquid Fill */}
+              <span className="absolute inset-0 flex items-end">
+                <span className="
+                  w-full h-0
+                  bg-linear-to-t from-[#0B3D91] to-[#4A8DFF]
+                  transition-all duration-700 ease-in-out
+                  group-hover:h-full
+                  relative
+                ">
+                  
+                  {/* Wave Surface */}
+                  <span className="absolute -top-3 left-0 w-full h-6 bg-[#4A8DFF] rounded-b-[50%] opacity-70 blur-[1px]"></span>
+
+                  {/* Shine Reflection */}
+                  <span className="absolute top-0 left-1/4 w-1/2 h-full bg-white/20 blur-md"></span>
+                </span>
+              </span>
+
+              {/* Text + Icon */}
+              <span className="relative z-10 group-hover:text-white duration-300 flex items-center gap-2 group-hover:gap-3 transition-all">
+                <LogIn size={16} />
                 ERP Login
-                <ChevronDown size={14} />
-              </button>
-
-              <div
-                className={`absolute right-0 top-full mt-2 w-52 bg-white rounded-xl shadow-xl border border-gray-100
-overflow-hidden transition-all duration-300
-${erpOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
-              >
-                <Link
-                  href="/erp/student"
-                  className="block px-4 py-3 text-sm hover:bg-blue-50"
-                >
-                  🎓 Student Login
-                </Link>
-
-                <Link
-                  href="/erp/parent"
-                  className="block px-4 py-3 text-sm hover:bg-blue-50"
-                >
-                  👨‍👩‍👧 Parent Login
-                </Link>
-
-                <Link
-                  href="/erp/teacher"
-                  className="block px-4 py-3 text-sm hover:bg-blue-50"
-                >
-                  👨‍🏫 Teacher Login
-                </Link>
-
-                <Link
-                  href="/erp/admin"
-                  className="block px-4 py-3 text-sm hover:bg-blue-50"
-                >
-                  ⚙ Admin Panel
-                </Link>
-              </div>
-            </div>
+              </span>
+            </Link>
           </nav>
         </div>
 
@@ -249,7 +220,6 @@ ${erpOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
       </div>
 
       {/* ================= MOBILE MENU ================= */}
-
       {mobileOpen && (
         <div className="lg:hidden bg-white shadow-md px-6 py-6">
           {menu.map((item) => (
@@ -261,7 +231,6 @@ ${erpOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
                 }
               >
                 {item.name}
-
                 {item.submenu && <ChevronDown size={16} />}
               </button>
 
@@ -280,6 +249,14 @@ ${erpOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
               )}
             </div>
           ))}
+
+          {/* MOBILE ERP BUTTON */}
+          <Link
+            href="/erp/login"
+            className="block mt-6 bg-[#C49A3B] text-white text-center px-4 py-3 rounded-md font-semibold"
+          >
+            ERP Login
+          </Link>
         </div>
       )}
     </header>
